@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Calculadora de Custo - API WhatsApp Business (Mensagens de Serviço)</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="wrap">
+  <div class="header">
+    <div class="badge">NOVIDADE META · VIGOR A PARTIR DE 01/10/2026</div>
+    <h1>Calculadora de Previsão de Gasto</h1>
+    <p>Estimativa de custo mensal com a nova cobrança de <strong>mensagens de serviço</strong> (respostas livres/não-template) enviadas via API Oficial do WhatsApp Business.</p>
+  </div>
+
+  <div class="card">
+    <div class="field">
+      <label for="msgs">Média de mensagens de serviço enviadas por mês</label>
+      <input type="number" id="msgs" placeholder="Ex: 8000" min="0" step="1">
+      <div class="hint">Considere apenas respostas enviadas pela sua empresa dentro da janela de 24h (não-template). Mensagens iniciadas pelo cliente que chegam até você não entram nessa conta — só as que você envia.</div>
+    </div>
+
+    <div class="row">
+      <div class="field">
+        <label for="usd">Cotação USD → BRL</label>
+        <input type="number" id="usd" value="5.30" min="0" step="0.01">
+        <div class="hint">Editável — ajuste conforme o câmbio do dia.</div>
+      </div>
+    </div>
+
+    <button onclick="calcular()">Calcular previsão de gasto</button>
+
+    <div class="results" id="results">
+      <div class="total-box">
+        <div class="label">Gasto estimado por mês</div>
+        <div class="value" id="totalBRL">R$ 0,00</div>
+        <div class="sub" id="totalUSD">US$ 0,00</div>
+      </div>
+
+      <div class="mini-grid">
+        <div class="mini">
+          <div class="l">Custo médio por mensagem</div>
+          <div class="v" id="avgMsg">R$ 0,00</div>
+        </div>
+        <div class="mini">
+          <div class="l">Projeção anual (×12)</div>
+          <div class="v" id="totalAno">R$ 0,00</div>
+        </div>
+      </div>
+
+      <table id="breakdownTable">
+        <thead>
+          <tr><th>Faixa de volume</th><th>Tarifa/msg (US$)</th><th class="num">Qtde. nessa faixa</th><th class="num">Subtotal (R$)</th></tr>
+        </thead>
+        <tbody id="breakdownBody"></tbody>
+        <tfoot>
+          <tr class="total-row"><td colspan="3">Total</td><td class="num" id="footTotal">R$ 0,00</td></tr>
+        </tfoot>
+      </table>
+
+      <div class="note">
+        ⚠️ A cobrança passa a valer <strong>a partir de 1º de outubro de 2026</strong> e usa a mesma tarifa das categorias "Utilidade" e "Autenticação", com desconto progressivo por volume (faixas mensais, resetadas todo mês, por conta comercial). As faixas entre 2 milhões e 70 milhões de mensagens/mês não tiveram valor exato divulgado na fonte consultada — para volumes nessa escala, confirme a tarifa exata na tabela oficial da Meta antes de orçar.
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-note">
+    Tarifas base: até 250.000 msgs → US$ 0,0068 · 250.001 a 2.000.000 → US$ 0,0065 · acima de 70.000.000 → US$ 0,0051.<br>
+    Fonte: Canaltech, "API do WhatsApp terá cobrança por mensagens de serviço; entenda" (01/07/2026), com base no portal de desenvolvedores da Meta.
+  </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
